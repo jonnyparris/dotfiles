@@ -1,0 +1,93 @@
+# Any files matching the search terms in this file will be ignored by git
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+# Compiled Python files
+*.pyc
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# MAC OSX #
+###########
+# .DS_Store holds information about the current folder for OSX
+# such as icon placement
+.DS_Store?
+.DS_Store
+.AppleDouble
+.LSOverride
+Desktop.ini
+
+# Backup files created by the vim text editor
+.swp
+
+# *.sqlite3 are local databases.  Make your own, don't share
+*.sqlite3
+
+# .Spotlight-V100 holds spotlight index files
+.Spotlight-V100
+
+# .Trashes holds disk specific trash folders
+.Trashes
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+ehthumbs.db
+Thumbs.db
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# SUBLIME TEXT #
+################
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+# VIM #
+#######
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
