@@ -9,7 +9,7 @@
 
 dir=~/dotfiles/jonnyparris/dotfiles   # dotfiles directory
 olddir=~/dotfiles_backup                 # old dotfiles backup directory
-files="bashrc bash_aliases bash_profile gitignore_global"    # list of files/folders to symlink in homedir
+files="bashrc bash_aliases bash_profile gitignore_global"    # list of files/folders to symlink in homedir TODO: Populate this list automatically
 
 ##########
 
@@ -31,5 +31,6 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+echo "Applying new bash profile settings, without restarting..."
 source ~/.bash_profile;
 source ~/.bashrc;
