@@ -1,8 +1,18 @@
+#navigation
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 #long list alias
 alias ll='ls -pl'
 
 #short list alias with hidden files included
 alias la='ls -ap'
+
+#only list directories
+alias lsd='ls -l | grep "^d"'
 
 #function combines cd with ls, because who ever knows where they're going??
 cdd()
@@ -27,14 +37,18 @@ alias gd='git diff'
 alias gcl='git clone'
 alias gl='git log'
 
+# Undo a `git push`
+alias undopush="git push -f origin HEAD^:master"
+
 #rails aliases
 alias r='rspec '
+alias be='bundle exec '
 
 #even faster sublime opener
 alias e='subl '
 
-#even faster sublime opener
-alias be='bundle exec '
-
 #rspec with color every time
 alias rspec='rspec -c '
+
+#reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
