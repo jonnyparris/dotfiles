@@ -4,6 +4,11 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
+# Add bash functions.
+if [ -f ~/.functions ]; then
+    source ~/.functions
+fi
+
 # A more colorful prompt
 # \[\e[0m\] resets the color to default color
 c_reset='\[\e[0m\]'
