@@ -25,9 +25,12 @@ alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finde
 alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 #git aliases for everyday use
+alias g='git '
 alias s='git status '
 alias a='git add '
 alias c='git commit -m '
+alias cv='git commit -v '
+alias ca='git commit --amend '
 alias gb='git branch '
 alias gcb='git checkout -b '
 alias gco='git checkout'
