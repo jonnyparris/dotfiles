@@ -28,6 +28,7 @@ alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder
 alias g='git '
 alias s='git status '
 alias a='git add '
+alias ap='git add -p'
 alias c='git commit -m '
 alias cv='git commit -v '
 alias ca='git commit --amend '
