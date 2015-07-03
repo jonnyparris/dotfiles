@@ -46,6 +46,8 @@ alias undopush="git push -f origin HEAD^:master"
 
 #rails aliases
 alias r='rspec '
+alias rk='rake '
+alias rka='rake assets:precompile'
 alias be='bundle exec '
 
 #even faster sublime opener
@@ -61,3 +63,4 @@ alias reload="exec $SHELL -l"
 alias h='heroku '
 alias hr='heroku restart'
 alias gph='git push heroku master '
+alias prec="rka && a . && c 'assets precompile' && gph && hr"
