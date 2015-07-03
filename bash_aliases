@@ -56,3 +56,8 @@ alias rspec='rspec -c '
 
 #reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+#heroku debugging
+alias h='heroku '
+alias hr='heroku restart'
+alias gph='git push heroku master '
