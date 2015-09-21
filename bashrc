@@ -36,6 +36,9 @@ git_prompt ()
   echo " [$git_color$git_branch${c_reset}]"
 }
 
+# Generate git ignore file boilerplate from gitignore.io api
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
 # PS1 is the variable for the prompt you see everytime you hit enter
 PROMPT_COMMAND='PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
 export PS1='\n\[\033[0;31m\]\W\[\033[0m\]$(git_prompt)\[\033[0m\]:> '
