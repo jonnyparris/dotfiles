@@ -1,9 +1,14 @@
+#function combines cd with ls, because who ever knows where they're going??
+cdd()
+{
+cd $1 && ls -p
+}
+
 #navigation
-alias cd..="cd .."
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ..="cdd .."
+alias ...="cdd ../.."
+alias ....="cdd ../../.."
+alias .....="cdd ../../../.."
 
 #long list alias
 alias ll='ls -pl'
@@ -14,29 +19,24 @@ alias la='ls -ap'
 #only list directories
 alias lsd='ls -l | grep "^d"'
 
-#function combines cd with ls, because who ever knows where they're going??
-cdd()
-{
-cd $1 && ls -p
-}
-
 #toggle view hidden files in finder super easily
-alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias showall='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideall='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 #git aliases for everyday use
-alias g='git '
-alias s='git status '
-alias a='git add '
+alias g='git'
+alias s='git status'
+alias a='git add'
+alias a.='git add .'
 alias ap='git add -p'
-alias c='git commit -m '
-alias cv='git commit -v '
-alias ca='git commit --amend '
-alias gb='git branch '
-alias gcb='git checkout -b '
+alias c='git commit -m'
+alias cv='git commit -v'
+alias ca='git commit --amend'
+alias gb='git branch'
+alias gcb='git checkout -b'
 alias gco='git checkout'
 alias gpm='git push origin master'
-alias gp='git push origin '
+alias gp='git push -u origin HEAD'
 alias gd='git diff'
 alias gcl='git clone'
 alias gl='git log'
@@ -45,22 +45,22 @@ alias gl='git log'
 alias undopush="git push -f origin HEAD^:master"
 
 #rails aliases
-alias r='rspec '
-alias rk='rake '
+alias r='rspec'
+alias rk='rake'
 alias rka='rake assets:precompile'
-alias be='bundle exec '
+alias be='bundle exec'
 
 #even faster sublime opener
-alias e='subl '
+alias e='subl'
 
 #rspec with color every time
-alias rspec='rspec -c '
+alias rspec='rspec -c'
 
 #reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
 #heroku debugging
-alias h='heroku '
+alias h='heroku'
 alias hr='heroku restart'
-alias gph='git push heroku master '
+alias gph='git push heroku master'
 alias prec="rka && a . && c 'assets precompile' && gph && hr"
