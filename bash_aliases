@@ -64,3 +64,6 @@ alias h='heroku'
 alias hr='heroku restart'
 alias gph='git push heroku master'
 alias prec="rka && a . && c 'assets precompile' && gph && hr"
+
+#docker
+alias dm='docker-machine '
