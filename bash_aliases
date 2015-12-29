@@ -68,4 +68,5 @@ alias prec="rka && a . && c 'assets precompile' && gph && hr"
 #docker
 alias d='docker '
 alias dm='docker-machine '
-alias docker_init="eval '$(docker-machine env default)' "
+alias dinit="eval '$(docker-machine env default)' "
+alias dbash='docker run -t -i ubuntu /bin/bash'
