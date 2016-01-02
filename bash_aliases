@@ -70,3 +70,4 @@ alias d='docker '
 alias dm='docker-machine '
 alias dinit="eval '$(docker-machine env default)' "
 alias dbash='docker run -t -i ubuntu /bin/bash'
+alias dcleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
