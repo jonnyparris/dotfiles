@@ -67,6 +67,7 @@ alias prec="rka && a . && c 'assets precompile' && gph && hr"
 
 #docker
 alias d='docker '
+alias di='docker images '
 alias dm='docker-machine '
 alias dinit="printf '\n>>> Initialising docker machine environment\n\n' && eval '$(docker-machine env default)' && printf '\n>>> Done.\n\n' "
 alias dbash='printf "\n>>> Launching ubuntu bash in a docker container\n\n" && docker run -t -i ubuntu /bin/bash'
