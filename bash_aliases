@@ -75,4 +75,4 @@ alias up='docker-compose up '
 alias dinitv="printf '\n>>> Initialising docker machine environment\n\n' && eval '$(docker-machine env default)' && printf '\n>>> Done.\n\n' "
 alias dinit="eval '$(docker-machine env default)'"
 alias dbash='printf "\n>>> Launching ubuntu bash in a docker container\n\n" && docker run -t -i ubuntu /bin/bash'
-alias dcleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+alias dcleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi -f $(docker images -q -f dangling=true)'
