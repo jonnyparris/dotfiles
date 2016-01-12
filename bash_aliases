@@ -76,3 +76,4 @@ alias dinitv="printf '\n>>> Initialising docker machine environment\n\n' && eval
 alias dinit="eval '$(docker-machine env default)'"
 alias dbash='printf "\n>>> Launching ubuntu bash in a docker container\n\n" && docker run -t -i ubuntu /bin/bash'
 alias dcleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi -f $(docker images -q -f dangling=true)'
+alias dcleanc='printf "\n>>> Deleting exited containers\n\n" && docker rm -v $(docker ps -a -q -f status=exited)'
