@@ -75,6 +75,7 @@ alias dm='docker-machine '
 alias dmd="docker-machine start default && docker-machine env default && eval '$(docker-machine env default)'"
 alias dco='docker-compose '
 alias up='docker-compose up '
+alias uprun='docker-compose run --service-ports '
 alias dinitv="printf '\n>>> Initialising docker machine environment\n\n' && eval '$(docker-machine env default)' && printf '\n>>> Done.\n\n' "
 alias dinit="eval '$(docker-machine env default)'"
 alias dbash='printf "\n>>> Launching ubuntu bash in a docker container\n\n" && docker run -t -i ubuntu /bin/bash'
