@@ -40,3 +40,4 @@ test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 set -a
 . ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt
 set +a
+
