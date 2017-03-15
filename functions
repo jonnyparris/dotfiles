@@ -2,3 +2,21 @@
 function md() {
   mkdir -p "$@" && cd "$@"
 }
+
+# ssh into ansible remote clients by hostname instead of raw IP address
+an-ssh() {
+  if [ -z "$1" ]; then
+    echo "No hostname specified"
+    echo "usage: an-ssh [hostname]";
+    return 1;
+  fi
+
+  HOSTFILE=`find ~/.ansible/hosts`
+  HOST=`cat $HOSTFILE | grep "$1" | cut -d " " -f2 | cut -d "=" -f2`
+  ANSIBLE_USER=`cat $HOSTFILE | grep "$1" | cut -d " " -f3 | cut -d "=" -f2`
+  PORT=`cat $HOSTFILE | grep "$1" | cut -d " " -f4 | cut -d "=" -f2`
+  command echo "hostfile found: $HOSTFILE"
+  command echo "host found: $HOST, port: $PORT"
+  command echo "connecting as $ANSIBLE_USER to $HOST on port $PORT"
+  command ssh "$ANSIBLE_USER@$HOST" -p "$PORT"
+}
