@@ -60,3 +60,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Add yarn global executables to path as a hotfix until they sort their bugs out
+# https://github.com/yarnpkg/yarn/issues/1151
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
