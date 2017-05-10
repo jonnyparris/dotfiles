@@ -20,3 +20,9 @@ an-ssh() {
   command echo "connecting as $ANSIBLE_USER to $HOST on port $PORT"
   command ssh "$ANSIBLE_USER@$HOST" -p "$PORT"
 }
+
+# server the current directory on defined port, 3000 by default
+function serve {
+  port="${1:-3000}"
+  ruby -run -e httpd . -p $port
+}
