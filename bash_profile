@@ -37,7 +37,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
 # set api token for digital ocean droplets management with ansible
-set -a
-. ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt
-set +a
-
+if [ -f ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt ]; then
+  set -a
+  . ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt
+  set +a
+fi

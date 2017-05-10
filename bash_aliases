@@ -82,3 +82,8 @@ alias dcleanc='printf "\n>>> Deleting exited containers\n\n" && docker rm -v $(d
 alias an='ansible '
 alias anp='ansible-playbook '
 alias ang='ansible-galaxy '
+
+#ubuntu
+alias get='sudo apt-get update && sudo apt-get install '
+alias of='nautilus '
+alias soo='sudo'
