@@ -88,3 +88,4 @@ alias get='sudo apt-get update && sudo apt-get install '
 alias of='nautilus '
 alias soo='sudo'
 alias xclip='xclip -selection c'
+alias ps_names="ps -eF | awk '{print $11}'"
