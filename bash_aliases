@@ -53,8 +53,8 @@ alias rk='rake'
 alias rka='rake assets:precompile'
 alias be='bundle exec'
 
-#even faster sublime opener
-alias e='subl'
+#even faster text editor opener
+alias e='code'
 
 #rspec with color every time
 alias rspec='rspec -c'
