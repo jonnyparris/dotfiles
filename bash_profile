@@ -23,8 +23,8 @@ test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 # Force grep to always use the color option
 export GREP_OPTIONS='--color=always'
 
-# set sublime as default text editor
-export EDITOR='subl -w'
+# set default text editor
+export EDITOR='code -w'
 
 # setup git autocomplete
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
