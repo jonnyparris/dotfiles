@@ -26,3 +26,19 @@ function serve {
   port="${1:-3000}"
   ruby -run -e httpd . -p $port
 }
+
+jira-ref-from-branch-name() {
+    git branch | grep '*' | grep -o '\w\+-\d\+'
+}
+
+jira-prefixed-commit() {
+    if [ -z "$*" ]; then
+        echo "No commit message supplied, aborting commit." && return 1
+    fi
+
+    local prefix=$(jira-ref-from-branch-name)
+    [ -n "$prefix" ] && prefix="$prefix:"
+
+    echo "git commit -m $prefix $@"
+    git commit -m "$prefix $@"
+}
