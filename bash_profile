@@ -27,8 +27,8 @@ export GREP_OPTIONS='--color=always'
 export EDITOR='code -w'
 
 # setup git autocomplete
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then 
+  . ~/.git-completion.bash 
 fi
 
 # Rbenv autocomplete and shims
