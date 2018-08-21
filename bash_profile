@@ -21,14 +21,14 @@ test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Force grep to always use the color option
-export GREP_OPTIONS='--color=always'
+export GREP_OPTIONS='--color=auto'
 
 # set default text editor
 export EDITOR='code -w'
 
 # setup git autocomplete
-if [ -f ~/.git-completion.bash ]; then 
-  . ~/.git-completion.bash 
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
 fi
 
 # Rbenv autocomplete and shims
