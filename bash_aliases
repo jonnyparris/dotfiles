@@ -44,6 +44,9 @@ alias gp='git push -u origin HEAD'
 alias gd='git diff'
 alias gcl='git clone'
 alias gl='git log --graph --decorate'
+alias gpull='git pull'
+alias gpullm='git pull origin master'
+alias gpullr='git pull origin master --rebase'
 
 # Undo a `git push`
 alias undopush="git push -f origin HEAD^:master"
