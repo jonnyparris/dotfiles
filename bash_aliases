@@ -11,7 +11,7 @@ alias ....="cdd ../../.."
 alias .....="cdd ../../../.."
 
 #long list alias
-alias l=ls -laF
+alias l='ls -laF'
 alias ll='ls -pl'
 
 #short list alias with hidden files included
@@ -21,8 +21,8 @@ alias la='ls -ap'
 alias lsd='ls -l | grep "^d"'
 
 #what's my ip?
-alias ip=“dig +short myip.opendns.com @resolver1.opendns.com”
-alias localip=“ipconfig getifaddr en0"
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip='ipconfig getifaddr en0'
 
 #toggle view hidden files in finder super easily
 alias showall='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
