@@ -12,6 +12,8 @@ source ~/.bashrc
 export PATH=/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
+# Path for flutter
+test -d /usr/local/bin && export PATH="$PATH:~/dev/flutter/bin"
 # Path for brew
 test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 # Path for Heroku
