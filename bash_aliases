@@ -98,3 +98,7 @@ alias of='nautilus '
 alias soo='sudo'
 alias xclip='xclip -selection c'
 alias ps_names="ps -eF | awk '{print $11}'"
+
+#brew
+alias bi='brew install'
+alias bci='brew cask install'
