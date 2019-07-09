@@ -87,6 +87,9 @@ alias dbash='printf "\n>>> Launching ubuntu bash in a docker container\n\n" && d
 alias dcleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi -f $(docker images -q -f dangling=true)'
 alias dcleanc='printf "\n>>> Deleting exited containers\n\n" && docker rm -v $(docker ps -a -q -f status=exited)'
 
+#terraform
+alias tf='terraform '
+
 #ansible
 alias an='ansible '
 alias anp='ansible-playbook '
