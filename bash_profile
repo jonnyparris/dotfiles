@@ -38,9 +38,21 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Path for RBENV
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
+HOMEBREW_PREFIX=$(brew --prefix)
+if type brew &>/dev/null; then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi
+
 # set api token for digital ocean droplets management with ansible
 if [ -f ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt ]; then
   set -a
   . ~/Dropbox/Freelance/secrets/digital_ocean_api_token.txt
   set +a
 fi
+export PATH="/usr/local/opt/ruby/bin:$PATH"

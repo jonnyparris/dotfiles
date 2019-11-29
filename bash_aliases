@@ -1,7 +1,6 @@
 #function combines cd with ls, because who ever knows where they're going??
-cdd()
-{
-cd $1 && ls -p
+cdd() {
+  cd $1 && ls -p
 }
 
 #navigation
@@ -105,3 +104,7 @@ alias ps_names="ps -eF | awk '{print $11}'"
 #brew
 alias bi='brew install'
 alias bci='brew cask install'
+
+#npm
+alias npm_ls='npm ls --depth 0'
+alias npm_lsg='npm ls --depth 0 -g'
