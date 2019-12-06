@@ -51,6 +51,7 @@ alias gl='git log --graph --decorate'
 alias gpull='git pull'
 alias gpullm='git pull origin master'
 alias gpullr='git pull origin master --rebase'
+alias gsu='git submodule update --init --recursive'
 
 # Undo a `git push`
 alias undopush="git push -f origin HEAD^:master"
