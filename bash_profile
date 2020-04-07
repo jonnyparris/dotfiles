@@ -33,8 +33,10 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 # Rbenv autocomplete and shims
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv >/dev/null; then eval "$(rbenv init -)"; fi
 # Path for RBENV
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
