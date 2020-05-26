@@ -111,3 +111,6 @@ alias bcinfo='brew cask info '
 #npm
 alias npm_ls='npm ls --depth 0'
 alias npm_lsg='npm ls --depth 0 -g'
+
+#open servers
+alias of='lsof -nP +c 15 | grep LISTEN'
