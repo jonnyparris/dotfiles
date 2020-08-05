@@ -35,6 +35,10 @@ git_prompt ()
   echo " [$git_color$git_branch${c_reset}]"
 }
 
+# Commit message without quotes prefix required
+function c() { git commit -m "$*"; }
+function c.() { git add --all; git commit -m "$*"; }
+
 # Generate git ignore file boilerplate from gitignore.io api
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
