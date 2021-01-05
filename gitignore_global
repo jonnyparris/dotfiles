@@ -2,7 +2,7 @@
 
 # Compiled source #
 ###################
-*.com
+# *.com Not necessary for now, and clashes with folders named after domains
 *.class
 *.dll
 *.exe

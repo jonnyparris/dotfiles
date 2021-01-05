@@ -103,7 +103,7 @@ alias ps_names="ps -eF | awk '{print $11}'"
 
 #brew
 alias bi='brew install'
-alias bci='brew cask install'
+alias bci='brew install --cask'
 alias bcs='brew search --casks --desc '
 alias bcinfo='brew cask info '
 
