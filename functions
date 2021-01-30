@@ -19,12 +19,12 @@ git_prompt() {
   echo " [$git_color$git_branch${c_reset}]"
 }
 
-# Commit message without quotes prefix required
-function c() { git commit -m "$*"; }
-function c.() {
-  git add --all
-  git commit -m "$*"
-}
+# Commit message without quotes prefix required - didn't use much anyway, seems to clash with zimfw
+# function c() { git commit -m "$*"; }
+# function c.() {
+#   git add --all
+#   git commit -m "$*"
+# }
 
 # Find pid of processes listening on specified port
 function pidport() { lsof -i tcp:$*; }
