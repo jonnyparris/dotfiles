@@ -18,7 +18,7 @@ test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 export GREP_OPTIONS='--color=auto'
 
 # set default text editor
-export EDITOR='code -w'
+export EDITOR='code-insiders -w'
 
 # Rbenv autocomplete and shims
 if which rbenv >/dev/null; then eval "$(rbenv init -)"; fi
