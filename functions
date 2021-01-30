@@ -3,6 +3,35 @@ function md() {
   mkdir -p "$@" && cd "$@"
 }
 
+# determines if the git branch you are on is clean or dirty
+git_prompt() {
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    return 0
+  fi
+  # Grab working branch name
+  git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
+  # Clean or dirty branch
+  if git diff --quiet 2>/dev/null >&2; then
+    git_color="${c_git_clean}"
+  else
+    git_color=${c_git_dirty}
+  fi
+  echo " [$git_color$git_branch${c_reset}]"
+}
+
+# Commit message without quotes prefix required
+function c() { git commit -m "$*"; }
+function c.() {
+  git add --all
+  git commit -m "$*"
+}
+
+# Find pid of processes listening on specified port
+function pidport() { lsof -i tcp:$*; }
+
+# Generate git ignore file boilerplate from gitignore.io api
+function gi() { curl -L -s https://www.gitignore.io/api/$@; }
+
 # ssh into ansible remote clients by hostname instead of raw IP address
 an-ssh() {
   if [ -z "$1" ]; then

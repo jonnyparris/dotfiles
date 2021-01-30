@@ -1,9 +1,9 @@
-# Add bash aliases.
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
+# Add aliases.
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
 fi
 
-# Add bash functions.
+# Add functions.
 if [ -f ~/.functions ]; then
   source ~/.functions
 fi
@@ -17,35 +17,6 @@ c_path='\[\e[0;35m\]'
 c_git_clean='\[\e[0;32m\]'
 # \e[0;31m\ sets the color to red
 c_git_dirty='\[\e[0;31m\]'
-
-# determines if the git branch you are on is clean or dirty
-git_prompt() {
-  if ! git rev-parse --git-dir >/dev/null 2>&1; then
-    return 0
-  fi
-  # Grab working branch name
-  git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
-  # Clean or dirty branch
-  if git diff --quiet 2>/dev/null >&2; then
-    git_color="${c_git_clean}"
-  else
-    git_color=${c_git_dirty}
-  fi
-  echo " [$git_color$git_branch${c_reset}]"
-}
-
-# Commit message without quotes prefix required
-function c() { git commit -m "$*"; }
-function c.() {
-  git add --all
-  git commit -m "$*"
-}
-
-# Find pid of processes listening on specified port
-function pidport() { lsof -i tcp:$*; }
-
-# Generate git ignore file boilerplate from gitignore.io api
-function gi() { curl -L -s https://www.gitignore.io/api/$@; }
 
 # PS1 is the variable for the prompt you see everytime you hit enter
 PROMPT_COMMAND='PS1="${c_path}\W${c_reset}$(git_prompt) :> "'

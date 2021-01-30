@@ -1,0 +1,11 @@
+[user]
+	name = jonnyparris
+	email = ruskin.constant+dev@gmail.com
+
+# Shortcuts for git clone, e.g. `git clone gh:plutov/gitbootstrap`
+[url "https://github.com/"]
+    insteadOf = gh:
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+[url "https://bitbucket.org/"]
+    insteadOf = bb:

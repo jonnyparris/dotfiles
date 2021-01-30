@@ -9,7 +9,7 @@
 
 dir=~/dotfiles   # dotfiles directory - wherever you want to load these files from (make sure to copy them to the new directory if not using this current directory default)
 olddir=~/dotfiles_backup                 # old dotfiles backup directory
-files="bashrc bash_aliases bash_profile gitignore_global functions"    # list of files/folders to symlink in homedir TODO: Populate this list automatically
+files="zshenv zshrc aliases gitconfig gitignore_global functions"    # list of files/folders to symlink in homedir TODO: Populate this list automatically
 
 ##########
 
@@ -65,5 +65,5 @@ fi
 install_zsh
 
 echo "Applying new bash profile settings, without restarting..."
-source ~/.bash_profile;
-source ~/.bashrc;
+source ~/.zshenv;
+source ~/.zshrc;
