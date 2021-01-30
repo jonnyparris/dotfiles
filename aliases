@@ -62,7 +62,7 @@ alias rka='rake assets:precompile'
 alias be='bundle exec'
 
 #even faster text editor opener
-alias e='code'
+alias e='code-insiders'
 
 #rspec with color every time
 alias rspec='rspec -c'
