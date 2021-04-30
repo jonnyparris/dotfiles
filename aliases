@@ -37,23 +37,23 @@ alias cj='jira-prefixed-commit'
 alias cv='git commit -v'
 alias ca='git commit --amend'
 alias gb='git branch'
-alias gbdm='git branch --merged master | grep -v "\master" | xargs -n 1 git branch -d'
+alias gbdm='git branch --merged main | grep -v "\main" | xargs -n 1 git branch -d'
 alias gcb='git checkout -b'
 alias gco='git checkout'
-alias gpm='git push origin master'
-alias gps='git push staging master'
-alias gpl='git push live master'
+alias gpm='git push origin main'
+alias gps='git push staging main'
+alias gpl='git push live main'
 alias gp='git push -u origin HEAD'
 alias gd='git diff'
 alias gcl='git clone'
 alias gl='git log --graph --decorate'
 alias gpull='git pull'
-alias gpullm='git pull origin master'
-alias gpullr='git pull origin master --rebase'
+alias gpullm='git pull origin main'
+alias gpullr='git pull origin main --rebase'
 alias gsu='git submodule update --init --recursive'
 
 # Undo a `git push`
-alias undopush="git push -f origin HEAD^:master"
+alias undopush="git push -f origin HEAD^:main"
 
 #rails aliases
 alias r='rspec'
