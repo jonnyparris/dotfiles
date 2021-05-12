@@ -28,8 +28,7 @@ bindkey -e
 #SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 
 # Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
+WORDCHARS=${WORDCHARS//[\/]/}
 
 # --------------------
 # Module configuration
@@ -147,3 +146,6 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 # Add Flutter
 export PATH="$PATH:$HOME/dev/flutter/bin"
+
+# Add Cargo
+export PATH="$PATH:$HOME/.cargo/bin"
