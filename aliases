@@ -93,6 +93,8 @@ alias tf='terraform '
 alias an='ansible '
 alias anp='ansible-playbook '
 alias ang='ansible-galaxy '
+alias ani='ansible-inventory --list -y'
+alias anv='ansible-vault'
 
 #ubuntu
 alias get='sudo apt-get update && sudo apt-get install '
