@@ -9,6 +9,9 @@ alias ...="cdd ../.."
 alias ....="cdd ../../.."
 alias .....="cdd ../../../.."
 
+#force grep to always use the color option
+alias grep="grep --color=auto "
+
 #long list alias
 alias l='ls -laF'
 alias ll='ls -pl'
