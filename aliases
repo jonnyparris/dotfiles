@@ -118,3 +118,7 @@ alias npm_lsg='npm ls --depth 0 -g'
 
 #open servers - https://wilsonmar.github.io/ports-open/
 alias of='lsof -nP +c 15 | grep LISTEN'
+
+#curl
+alias curl_h='curl -D - ' # dump response headers
+alias curl_honly='curl -D - -o /dev/null ' # dump response headers, ignore body
