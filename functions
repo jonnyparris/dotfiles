@@ -71,3 +71,27 @@ jira-prefixed-commit() {
     echo "git commit -m $prefix $@"
     git commit -m "$prefix $@"
 }
+
+toggle-alacritty-opacity() {
+  ## If alacritty.yml does not exist, raise an alert
+  [[ ! -f ~/dotfiles/alacritty.yml ]] && \
+      notify-send "alacritty.yml does not exist" && exit 0
+
+  ## Fetch background_opacity from alacritty.yml
+  opacity=$(awk '$1 == "background_opacity:" {print $2; exit}' \
+      ~/dotfiles/alacritty.yml)
+
+  ## Assign toggle opacity value
+  case $opacity in
+    1)
+      toggle_opacity=0.7
+      ;;
+    *)
+      toggle_opacity=1
+      ;;
+  esac
+
+  ## Replace opacity value in alacritty.yml
+  sed -i -- "s/background_opacity: $opacity/background_opacity: $toggle_opacity/" \
+      ~/dotfiles/alacritty.yml
+}
