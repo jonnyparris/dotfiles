@@ -1,0 +1,8 @@
+*.local
+*.local.*
+.secrets*
+.env
+auth*.json
+mcp-auth*.json
+cmux.json
+socket-password

@@ -9,7 +9,7 @@
 
 dir=~/dotfiles   # dotfiles directory - wherever you want to load these files from (make sure to copy them to the new directory if not using this current directory default)
 olddir=~/dotfiles_backup                 # old dotfiles backup directory
-files="zshenv zshrc aliases gitconfig gitignore_global functions alacritty.yml tmux.conf tmux.conf.local"    # list of files/folders to symlink in homedir TODO: Populate this list automatically
+files="zshenv zshrc zprofile zimrc aliases gitconfig gitignore_global functions alacritty.yml tmux.conf tmux.conf.local"    # list of files/folders to symlink in homedir TODO: Populate this list automatically
 
 ##########
 
@@ -25,10 +25,12 @@ echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_backup directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_backup/
+    if [ -e ~/.$file ] && [ ! -L ~/.$file ]; then
+        echo "Moving existing ~/.$file to $olddir"
+        mv ~/.$file $olddir/
+    fi
     echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+    ln -sfn $dir/$file ~/.$file
 done
 
 install_zsh () {
@@ -39,8 +41,7 @@ if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
         chsh -s $(which zsh)
     fi
 
-    # Install zimfw - it's already a defensively written install script so no need to check if it's already present
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+    # zimfw installs itself: zshrc downloads zimfw.zsh and installs the modules in zimrc on first start
 else
     # If zsh isn't installed, get the platform of the current machine
     platform=$(uname);
@@ -64,6 +65,7 @@ fi
 
 install_zsh
 
-echo "Applying new bash profile settings, without restarting..."
-source ~/.zshenv;
-source ~/.zshrc;
+# pi + cmux (symlinks, settings.json merge, cmux.json). Needs jq + node: brew bundle --file $dir/Brewfile
+$dir/install-pi-cmux.sh || echo "install-pi-cmux.sh failed; run it again after brew bundle"
+
+echo "Done. Open a new terminal (zimfw installs its modules on first start)."

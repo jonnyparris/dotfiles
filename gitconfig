@@ -1,6 +1,6 @@
 [user]
 	name = jonnyparris
-	email = ruskin.constant+dev@gmail.com
+	email = 6400000+jonnyparris@users.noreply.github.com
 
 # Shortcuts for git clone, e.g. `git clone gh:plutov/gitbootstrap`
 [url "https://github.com/"]
@@ -11,3 +11,12 @@
     insteadOf = bb:
 [init]
 	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential
+# Machine-local overrides (work identity, certs). Never committed.
+[include]
+	path = ~/.gitconfig.local

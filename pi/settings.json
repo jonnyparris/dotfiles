@@ -1,0 +1,8 @@
+{
+  "packages": [
+    "npm:pi-cmux",
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ],
+  "extensions": [],
+  "theme": "dark"
+}

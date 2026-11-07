@@ -36,14 +36,14 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@; }
 an-ssh() {
   if [ -z "$1" ]; then
     echo "No hostname specified"
-    echo "usage: an-ssh [hostname]";
-    return 1;
+    echo "usage: an-ssh [hostname]"
+    return 1
   fi
 
-  HOSTFILE=`find ~/.ansible/hosts`
-  HOST=`cat $HOSTFILE | grep "$1" | cut -d " " -f2 | cut -d "=" -f2`
-  ANSIBLE_USER=`cat $HOSTFILE | grep "$1" | cut -d " " -f3 | cut -d "=" -f2`
-  PORT=`cat $HOSTFILE | grep "$1" | cut -d " " -f4 | cut -d "=" -f2`
+  HOSTFILE=$(find ~/.ansible/hosts)
+  HOST=$(cat $HOSTFILE | grep "$1" | cut -d " " -f2 | cut -d "=" -f2)
+  ANSIBLE_USER=$(cat $HOSTFILE | grep "$1" | cut -d " " -f3 | cut -d "=" -f2)
+  PORT=$(cat $HOSTFILE | grep "$1" | cut -d " " -f4 | cut -d "=" -f2)
   command echo "hostfile found: $HOSTFILE"
   command echo "host found: $HOST, port: $PORT"
   command echo "connecting as $ANSIBLE_USER to $HOST on port $PORT"
@@ -57,41 +57,41 @@ function serve {
 }
 
 jira-ref-from-branch-name() {
-    git branch | grep '*' | grep -o '\w\+-\d\+'
+  git branch | grep '*' | grep -o '\w\+-\d\+'
 }
 
 jira-prefixed-commit() {
-    if [ -z "$*" ]; then
-        echo "No commit message supplied, aborting commit." && return 1
-    fi
+  if [ -z "$*" ]; then
+    echo "No commit message supplied, aborting commit." && return 1
+  fi
 
-    local prefix=$(jira-ref-from-branch-name)
-    [ -n "$prefix" ] && prefix="$prefix:"
+  local prefix=$(jira-ref-from-branch-name)
+  [ -n "$prefix" ] && prefix="$prefix:"
 
-    echo "git commit -m $prefix $@"
-    git commit -m "$prefix $@"
+  echo "git commit -m $prefix $@"
+  git commit -m "$prefix $@"
 }
 
 toggle-alacritty-opacity() {
   ## If alacritty.yml does not exist, raise an alert
-  [[ ! -f ~/dotfiles/alacritty.yml ]] && \
-      notify-send "alacritty.yml does not exist" && exit 0
+  [[ ! -f ~/dotfiles/alacritty.yml ]] &&
+    notify-send "alacritty.yml does not exist" && exit 0
 
   ## Fetch background_opacity from alacritty.yml
   opacity=$(awk '$1 == "background_opacity:" {print $2; exit}' \
-      ~/dotfiles/alacritty.yml)
+    ~/dotfiles/alacritty.yml)
 
   ## Assign toggle opacity value
   case $opacity in
-    1)
-      toggle_opacity=0.7
-      ;;
-    *)
-      toggle_opacity=1
-      ;;
+  1)
+    toggle_opacity=0.7
+    ;;
+  *)
+    toggle_opacity=1
+    ;;
   esac
 
   ## Replace opacity value in alacritty.yml
   sed -i -- "s/background_opacity: $opacity/background_opacity: $toggle_opacity/" \
-      ~/dotfiles/alacritty.yml
+    ~/dotfiles/alacritty.yml
 }

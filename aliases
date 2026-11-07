@@ -1,3 +1,6 @@
+# zoxide
+(( ${+commands[zoxide]} )) && alias cd='z'
+
 #function combines cd with ls, because who ever knows where they're going??
 cdd() {
   cd $1 && ls -p
@@ -65,7 +68,7 @@ alias rka='rake assets:precompile'
 alias be='bundle exec'
 
 #even faster text editor opener
-alias e='code'
+alias e='windsurf'
 
 #rspec with color every time
 alias rspec='rspec -c'
@@ -125,3 +128,5 @@ alias curl_honly='curl -D - -o /dev/null ' # dump response headers, ignore body
 
 #alacritty
 alias tao='toggle-alacritty-opacity'
+
+alias ff='fzf'

@@ -95,21 +95,26 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 # Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+# Download to a temp file and move it in, so a failed download is retried next start.
+if [[ ! -s ${ZIM_HOME}/zimfw.zsh ]]; then
   if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh.tmp.$$ \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh \
+      && mv ${ZIM_HOME}/zimfw.zsh.tmp.$$ ${ZIM_HOME}/zimfw.zsh \
+      || rm -f ${ZIM_HOME}/zimfw.zsh.tmp.$$
   else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh.tmp.$$ \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh \
+      && mv ${ZIM_HOME}/zimfw.zsh.tmp.$$ ${ZIM_HOME}/zimfw.zsh \
+      || rm -f ${ZIM_HOME}/zimfw.zsh.tmp.$$
   fi
 fi
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+if [[ -s ${ZIM_HOME}/zimfw.zsh && ( ! -s ${ZIM_HOME}/init.zsh || ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ) ]]; then
   source ${ZIM_HOME}/zimfw.zsh init
 fi
 # Initialize modules.
-# source ${ZIM_HOME}/init.zsh
+if [[ -s ${ZIM_HOME}/init.zsh ]]; then source ${ZIM_HOME}/init.zsh; else print -u2 "zim: ${ZIM_HOME}/init.zsh missing (zimfw download failed?); open a new shell when online"; fi
 
 # ------------------------------
 # Post-init module configuration
@@ -156,4 +161,20 @@ export PATH="$PATH:$HOME/dev/flutter/bin"
 
 # Add Cargo
 export PATH="$PATH:$HOME/.cargo/bin"
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Windsurf
+[ -d "$HOME/.codeium/windsurf/bin" ] && export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+
+# zoxide (aliases: cd -> z)
+(( ${+commands[zoxide]} )) && eval "$(zoxide init zsh)"
+
+# uv / pipx-style ~/.local/bin
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
+# Machine-local interactive config (work tools, wrappers). Never committed.
+if [ -f "$HOME/.zshrc.local" ]; then source "$HOME/.zshrc.local"; fi
