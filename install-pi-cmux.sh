@@ -17,7 +17,8 @@ PI=${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}
 CMUX=$HOME/.config/cmux
 
 command -v jq >/dev/null || { echo "install-pi-cmux: needs jq (brew bundle --file $DOT/Brewfile)" >&2; exit 1; }
-if ! command -v pi >/dev/null; then
+# Inside cmux the first `pi` on PATH is a cmux shim, which doesn't count as installed.
+if ! type -ap pi | grep -qv '/cmux-cli-shims/'; then
   echo "installing pi…"
   npm install -g @earendil-works/pi-coding-agent
 fi
