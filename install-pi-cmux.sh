@@ -17,10 +17,13 @@ PI=${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}
 CMUX=$HOME/.config/cmux
 
 command -v jq >/dev/null || { echo "install-pi-cmux: needs jq (brew bundle --file $DOT/Brewfile)" >&2; exit 1; }
-# Inside cmux the first `pi` on PATH is a cmux shim, which doesn't count as installed.
+# A cmux shim (…/cmux-cli-shims/…/pi) doesn't count as installed; any other pi on PATH does.
+# Installs into ~/.local (user-writable), not npm's global prefix, which may be root-owned. ~/.local/bin goes on this
+# script's PATH so an existing install is found from bash too; zshenv/zprofile put it on the shell's PATH.
+export PATH="$HOME/.local/bin:$PATH"
 if ! type -ap pi | grep -qv '/cmux-cli-shims/'; then
-  echo "installing pi…"
-  npm install -g @earendil-works/pi-coding-agent
+  echo "installing pi into ~/.local…"
+  npm install -g --prefix "$HOME/.local" @earendil-works/pi-coding-agent
 fi
 
 BACKUP=$HOME/dotfiles_backup

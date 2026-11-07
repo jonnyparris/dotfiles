@@ -33,6 +33,9 @@ if which rbenv >/dev/null; then eval "$(rbenv init -)"; fi
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# User-level installs (pi, uv tools, …)
+export PATH="$HOME/.local/bin:$PATH"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # pi: cmux-activity.ts owns the cmux progress channel; disable pi-cmux sidebar writer
