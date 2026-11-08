@@ -8,7 +8,7 @@
 #     committed) overrides both. `packages` and `extensions` are concatenated (existing, base, local; duplicates
 #     dropped), so entries added with `pi install` survive; removing one means editing ~/.pi/agent/settings.json too
 #   - creates ~/.config/cmux/cmux.json with a fresh random socket password if it doesn't exist
-#   - applies cmux/prefs.plist (cmux app preferences) on a Mac where cmux has none yet
+#   - applies cmux/prefs.plist (cmux app preferences) the first time it runs on a Mac
 #
 # Secrets never live in this repo: pi auth is in ~/.pi/agent/auth.json / mcp-auth.json, cmux's socket password in
 # ~/.config/cmux/cmux.json — all created on the machine.
@@ -62,14 +62,36 @@ if [ ! -f "$CMUX/cmux.json" ]; then
   echo "  $CMUX/cmux.json (new socket password)"
 fi
 
-# cmux app preferences (sidebar look, blur/tint, pi-board sidebar): apply automatically only on a Mac where cmux has no
-# preferences yet, so re-runs never undo changes made in cmux's UI. Otherwise: cmux/prefs.sh diff / apply.
-if [ "$(uname)" = Darwin ] && [ -f "$DOT/cmux/prefs.plist" ]; then
-  if ! defaults read com.cmuxterm.app >/dev/null 2>&1; then
-    "$DOT/cmux/prefs.sh" apply || echo "  cmux prefs not applied; quit cmux and run $DOT/cmux/prefs.sh apply" >&2
+# cmux app preferences (sidebar look, blur/tint, pi-board sidebar): applied once, on a Mac where cmux has none of the
+# carried keys set (marker file after), so neither re-runs nor first runs undo settings made in cmux. Else: prefs.sh diff / apply.
+MARK=$CMUX/.dotfiles-prefs-applied PENDING=$CMUX/.dotfiles-prefs-pending
+if [ "$(uname)" = Darwin ] && [ -f "$DOT/cmux/prefs.plist" ] && [ ! -e "$MARK" ]; then
+  rc=0; [ -e "$PENDING" ] || { "$DOT/cmux/prefs.sh" fresh || rc=$?; }
+  if [ "$rc" = 3 ]; then
+    touch "$MARK"  # cmux already has its own settings here: keep them
+    echo "  cmux prefs: this Mac has its own cmux settings, kept; '$DOT/cmux/prefs.sh diff' / apply to take the repo's"
+  elif [ "$rc" != 0 ]; then
+    echo "  cmux prefs: couldn't check this Mac's cmux settings (prefs.sh fresh exit $rc); nothing applied, will retry next run" >&2
   else
-    echo "  cmux prefs: existing preferences kept; '$DOT/cmux/prefs.sh diff' shows what apply would change"
+    # Pending until apply succeeds, so a refused (cmux open) or partial apply finishes on the next run even though
+    # cmux, or the partial apply itself, has set some of the keys by then.
+    arc=0
+    if ! "$DOT/cmux/prefs.sh" diff >/dev/null; then  # repo prefs.plist must parse before PENDING is armed
+      arc=1
+    else
+      touch "$PENDING"
+      "$DOT/cmux/prefs.sh" apply || arc=$?
+    fi
+    if [ "$arc" = 0 ]; then
+      touch "$MARK"; rm -f "$PENDING"
+    elif [ "$arc" = 4 ]; then
+      echo "  cmux prefs not applied; quit cmux, then re-run this script" >&2
+    else
+      echo "  cmux prefs: apply failed (exit $arc, see above); will retry next run" >&2
+    fi
   fi
+elif [ -e "$MARK" ]; then
+  echo "  cmux prefs: applied or kept on this Mac before; '$DOT/cmux/prefs.sh diff' shows what apply would change"
 fi
 
 echo "done. Restart pi (or /reload) and cmux to pick changes up."

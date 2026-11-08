@@ -53,10 +53,18 @@ Two parts, both carried here:
 ~/dotfiles/cmux/prefs.sh apply     # quit cmux first; writes the keys with `defaults write`
 ```
 
-`install-pi-cmux.sh` runs `apply` by itself only on a Mac where cmux has no preferences yet, so a re-run never undoes
-changes made in cmux's Settings. Only an allowlist of plain values travels (see the top of `prefs.sh`). Window
-positions, workspace layouts, browser profiles, telemetry/device IDs, feature flags and the socket password stay on
-the machine. cmux's own settings file (`~/.config/cmux/cmux.json`) isn't used for these: values set there become
+`install-pi-cmux.sh` runs `apply` by itself once, and only on a Mac where cmux has none of these keys set yet. A Mac
+with its own cmux settings keeps them. After a successful apply, or after keeping existing settings, it writes the
+marker `~/.config/cmux/.dotfiles-prefs-applied` and leaves cmux prefs alone on later runs; use `diff` / `apply` by
+hand to take the repo's. When it auto-applies, it first writes `~/.config/cmux/.dotfiles-prefs-pending` and
+removes it only once apply succeeds. If cmux was open (apply refused) or apply failed, quit cmux and re-run: that run applies the repo's prefs without the "has its
+own settings" check, overwriting any of these keys changed in cmux in between. If cmux was opened before the
+installer ever ran, it may have saved some of these keys itself, so the Mac counts as having its own settings: run
+`cmux/prefs.sh apply` once.
+Only the keys listed in `KEYS` in `prefs.sh` travel, including
+`customSidebars.beta.enabled`, which pi-board needs. Window positions, workspace layouts, browser profiles,
+telemetry/device IDs, server feature flags and the socket password stay on the machine. `capture` lists setting-like
+keys it didn't carry, so new cmux settings can be added to `KEYS` on purpose. cmux's own settings file (`~/.config/cmux/cmux.json`) isn't used for these: values set there become
 "managed" and can no longer be changed in the UI.
 
 ### pi settings
@@ -84,9 +92,10 @@ provide them as symlinks.
 
 Created on the machine and never in this repo: `~/.pi/agent/auth.json` and `mcp-auth.json` (pi logins),
 `~/.config/cmux/cmux.json` (holds cmux's socket password; `install-pi-cmux.sh` generates a random one).
-`.gitignore` blocks `*.local*`, `.secrets*`, `.env`, `auth*.json`, `cmux.json` in case one lands in the repo.
+`.gitignore` blocks `*.local`, `*.local.*`, `.secrets*`, `.env`, `auth*.json`, `mcp-auth*.json`, `cmux.json` and
+`socket-password` in case one lands in the repo.
 
 ## Commits
 
-Commit as `jonnyparris <6400000+jonnyparris@users.noreply.github.com>`. GitHub rejects pushes that expose the private
-email.
+Commit as `jonnyparris <6400000+jonnyparris@users.noreply.github.com>` (set in this repo's `.git/config`; a work
+`~/.gitconfig.local` would otherwise win). This account has GitHub's "block pushes that expose my email" on.
