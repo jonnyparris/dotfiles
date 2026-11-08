@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearanceMode</key>
+	<string>system</string>
+	<key>browserInterceptTerminalOpenCommandInCmuxBrowser</key>
+	<false/>
+	<key>browserOpenTerminalLinksInCmuxBrowser</key>
+	<false/>
+	<key>browserSearchEngine</key>
+	<string>duckduckgo</string>
+	<key>cmuxExtensionSidebarProviderId</key>
+	<string>cmux.sidebar.custom.pi-board</string>
+	<key>confirmQuit</key>
+	<string>dirty-only</string>
+	<key>customSidebars.beta.enabled</key>
+	<true/>
+	<key>fileExplorer.width</key>
+	<real>295.0</real>
+	<key>markdown.fontFamily</key>
+	<string></string>
+	<key>rightSidebar.mode</key>
+	<string>files</string>
+	<key>sidebarAppearanceDefaultsVersion</key>
+	<integer>1</integer>
+	<key>sidebarBlendMode</key>
+	<string>withinWindow</string>
+	<key>sidebarBlurOpacity</key>
+	<real>1.0</real>
+	<key>sidebarBranchDirectoryStacked</key>
+	<false/>
+	<key>sidebarCornerRadius</key>
+	<real>0.0</real>
+	<key>sidebarHideAllDetails</key>
+	<false/>
+	<key>sidebarMatchTerminalBackground</key>
+	<true/>
+	<key>sidebarMaterial</key>
+	<string>sidebar</string>
+	<key>sidebarPreset</key>
+	<string>nativeSidebar</string>
+	<key>sidebarState</key>
+	<string>followWindow</string>
+	<key>sidebarTintHex</key>
+	<string>#000000</string>
+	<key>sidebarTintOpacity</key>
+	<real>0.18</real>
+	<key>sidebarWrapWorkspaceTitles</key>
+	<true/>
+	<key>sleepyMode.glow</key>
+	<string>black</string>
+	<key>terminal.copyOnSelect</key>
+	<true/>
+	<key>workspacePresentationMode</key>
+	<string>standard</string>
+</dict>
+</plist>

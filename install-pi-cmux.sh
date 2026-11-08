@@ -8,6 +8,7 @@
 #     committed) overrides both. `packages` and `extensions` are concatenated (existing, base, local; duplicates
 #     dropped), so entries added with `pi install` survive; removing one means editing ~/.pi/agent/settings.json too
 #   - creates ~/.config/cmux/cmux.json with a fresh random socket password if it doesn't exist
+#   - applies cmux/prefs.plist (cmux app preferences) on a Mac where cmux has none yet
 #
 # Secrets never live in this repo: pi auth is in ~/.pi/agent/auth.json / mcp-auth.json, cmux's socket password in
 # ~/.config/cmux/cmux.json — all created on the machine.
@@ -59,6 +60,16 @@ if [ ! -f "$CMUX/cmux.json" ]; then
   jq -n --arg pw "$pw" '{schemaVersion: 1, "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
     automation: {socketControlMode: "password", socketPassword: $pw}}' > "$CMUX/cmux.json"
   echo "  $CMUX/cmux.json (new socket password)"
+fi
+
+# cmux app preferences (sidebar look, blur/tint, pi-board sidebar): apply automatically only on a Mac where cmux has no
+# preferences yet, so re-runs never undo changes made in cmux's UI. Otherwise: cmux/prefs.sh diff / apply.
+if [ "$(uname)" = Darwin ] && [ -f "$DOT/cmux/prefs.plist" ]; then
+  if ! defaults read com.cmuxterm.app >/dev/null 2>&1; then
+    "$DOT/cmux/prefs.sh" apply || echo "  cmux prefs not applied; quit cmux and run $DOT/cmux/prefs.sh apply" >&2
+  else
+    echo "  cmux prefs: existing preferences kept; '$DOT/cmux/prefs.sh diff' shows what apply would change"
+  fi
 fi
 
 echo "done. Restart pi (or /reload) and cmux to pick changes up."
